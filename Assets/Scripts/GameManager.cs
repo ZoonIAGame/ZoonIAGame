@@ -42,6 +42,17 @@ public class GameManager : MonoBehaviour
     public int vEnvejecimientoEstandar = 1;
     [Range(0.001f, 1f)]
     public float pelajeEstandar = 0f;
+
+    public enum LoopType
+    {
+        update, fixedUpdate
+    }
+    [Header("Variables de control de Simulacion")]
+    [Space(5)]
+    public LoopType tipoLoop = LoopType.update;
+    [Range(1, 100)]
+    public float timeSpeed = 100;
+
     [Header("Variables de Mutacion")]
     [Space(5)]
     [Min(0.001f)]
@@ -51,6 +62,7 @@ public class GameManager : MonoBehaviour
     [Min(1f)]
     public float maxVariabilidad = 15;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +71,11 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        Time.timeScale = timeSpeed;
+    }
+
+    void FixedUpdate()
     {
         
     }
