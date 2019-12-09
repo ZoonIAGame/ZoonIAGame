@@ -24,13 +24,60 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798559058201645312}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: -0.61, z: -0.524}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: 0, y: -0.61000013, z: -0.5239999}
+  m_LocalScale: {x: 100, y: 99.99997, z: 99.99997}
   m_Children:
   - {fileID: 7557752485260985894}
-  m_Father: {fileID: 7557752485260985888}
+  m_Father: {fileID: 8301838826081544361}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6232848003042117866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8301838826081544361}
+  - component: {fileID: 1341418622731395272}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8301838826081544361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232848003042117866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7557752485260985890}
+  - {fileID: 1798559058201645313}
+  m_Father: {fileID: 7557752485260985888}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1341418622731395272
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232848003042117866}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7557752485260630528
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,11 +88,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7557752485260985888}
   - component: {fileID: 7557752485260630531}
-  - component: {fileID: 7557752485260630529}
   - component: {fileID: 7557752485260630532}
   m_Layer: 0
   m_Name: Carnivoro
-  m_TagString: Untagged
+  m_TagString: Actor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,8 +107,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 4.27, z: -3.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7557752485260985890}
-  - {fileID: 1798559058201645313}
+  - {fileID: 8301838826081544361}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,22 +125,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &7557752485260630529
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7557752485260630528}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1
-  m_Height: 3
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7557752485260630532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +144,54 @@ MonoBehaviour:
     tex: {fileID: 2800000, guid: 702b3b8f3948bb84188b69329c986f74, type: 3}
   - nombre: Enfadado
     tex: {fileID: 2800000, guid: a515196eeb20ae840a8a918dbfa94cb0, type: 3}
+  tamano: 0
+  velocidad: 0
+  corriendo: 0
+  rangoSens: 0
+  perseverancia: 0
+  soyHembra: 0
+  embarazada: 0
+  tGestacion: 0
+  nHijos: 0
+  fuerzaBase: 0
+  atractivoBase: 0
+  agroMismoSexBase: 0
+  agroDistSexBase: 0
+  agroOtrosBase: 0
+  miedo: 0
+  sociabBase: 0
+  sociable: 0
+  enManada: 0
+  vulneBase: 0
+  "duracionSue\xF1o": 0
+  vEnvejecimiento: 0
+  pelaje: 0
+  edad: 0
+  tamanoEdad: 0
+  velocidadEdad: 0
+  rangoSensEdad: 0
+  fuerzaBaseEdad: 0
+  atractivoBaseEdad: 0
+  vulneBaseEdad: 0
+  pelajeEdad: 0
+  vida: 0
+  energia: 0
+  agua: 0
+  reproduccion: 0
+  "sue\xF1o": 0
+  temperatura: 0
+  humedad: 0
+  fuerzaFinal: 0
+  atractivoFinal: 0
+  agroMismoSexo: 0
+  agroDistSexo: 0
+  agroOtros: 0
+  sociabFinal: 0
+  variacionTempIdeal: 0
+  vulneFinal: 0
+  objetivo: {x: 0, y: 0, z: 0}
+  prioridadObjetivoActual: 0
+  tiempoPerseguido: 0
 --- !u!1 &7557752485260630530
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,11 +217,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7557752485260630530}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 100, y: 99.99997, z: 99.99997}
   m_Children: []
-  m_Father: {fileID: 7557752485260985888}
+  m_Father: {fileID: 8301838826081544361}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7557752485263885826
@@ -217,7 +296,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7557752485260630534}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.005240002, z: 0.0061000013}
+  m_LocalPosition: {x: 0, y: -0.0052400013, z: 0.006100002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1798559058201645313}

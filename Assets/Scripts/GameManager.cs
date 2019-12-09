@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Variables de Simulación")]
+    [Space(5)]
+    [Min(1)]
+    public int udtPorSegundo = 1;
+    public float multiplicadorRestaEnergia = 0.05f;
+    public float multiplicadorRestaAgua = 0.25f;
+    public float multiplicadorRestaSexo = 0.25f;
     [Header("Variables de Generacion Inicial")]
     [Space(5)]
     [Min(1)]
@@ -32,6 +39,7 @@ public class GameManager : MonoBehaviour
     public float velocidadEstandar = 5f;
     [Min(0.001f)]
     public float rangoSensEstandar = 5f;
+    public float perseveranciaEstandar = 5f;
     [Range(0, 1)]
     public float proporcionHembras = 0.5f;
     [Min(1)]
@@ -57,7 +65,7 @@ public class GameManager : MonoBehaviour
     [Min(0)]
     public int duracionSueñoEstandar = 10;
     [Min(0.001f)]
-    public int vEnvejecimientoEstandar = 1;
+    public float vEnvejecimientoEstandar = 1;
     [Range(0.001f, 1f)]
     public float pelajeEstandar = 0f;
 
