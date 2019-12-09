@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
     [Min(0.001f)]
     public float maxMutacion1 = 0.5f;
     [Min(1)]
-    public int maxMutacionInf = 1;
+    public float maxMutacionInf = 1;
     [Min(1f)]
     public float maxVariabilidad = 15;
 
@@ -121,6 +121,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         Time.timeScale = timeSpeed;
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+            Debug.LogWarning("App Closed");
+        }
     }
 
     void FixedUpdate()

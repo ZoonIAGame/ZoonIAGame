@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GlobalFlock : MonoBehaviour
 {
-    public static int groupSize = 10;
+    public static int groupSize = 250;
 
     public static Vector3 goalPos = Vector3.zero;
 

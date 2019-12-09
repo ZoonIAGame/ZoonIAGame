@@ -77,7 +77,7 @@ public class MapGenerator : MonoBehaviour
     {
         if (generateTrees && (!Application.isEditor || Application.isPlaying))
         {
-            if (contador >= (1f / manager.udtPorSegundo) * 150)
+            if (contador >= (1f / manager.udtPorSegundo) * 90)
             {
                 this.GetComponent<TreeBushGenerator>().generarArbustos();
                 contador = 0;

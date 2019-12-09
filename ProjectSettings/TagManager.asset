@@ -8,6 +8,7 @@ TagManager:
   - BichitosGroup
   - Actor
   - ArbolitosGroup
+  - TreeBush
   layers:
   - Default
   - TransparentFX

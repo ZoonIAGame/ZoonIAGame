@@ -14,7 +14,7 @@ public class TreeBushGenerator : MonoBehaviour
     [Tooltip("Altura mínima para un platationSite")]
     public float alturaMin = 0.4f;
     [Tooltip("Altura máxima para un platationSite")]
-    public float alturaMax = 2.73f;
+    public float alturaMax = 1.68f;
     [Range(0, 1)]
     [Tooltip("Probabilidad de que aparezca un arbol en un vertice para decorar")]
     public float probabilityOfTrees;
@@ -71,12 +71,16 @@ public class TreeBushGenerator : MonoBehaviour
                 plantsite.plantacion = SitioPlantacion.plantationType.tree;
                 plantsite.model = Instantiate(treePrefab, plantsite.pos, Quaternion.identity);
                 plantsite.model.transform.SetParent(arbolitosGroup.transform);
+                plantsite.model.AddComponent<TreeBush>();
+                plantsite.model.GetComponent<TreeBush>().mySitio = plantsite;
             }
             else if (random <= probabilityOfBushes)
             {
-                plantsite.plantacion = SitioPlantacion.plantationType.tree;
+                plantsite.plantacion = SitioPlantacion.plantationType.bush;
                 plantsite.model = Instantiate(bushPrefab, plantsite.pos, Quaternion.identity);
                 plantsite.model.transform.SetParent(arbolitosGroup.transform);
+                plantsite.model.AddComponent<TreeBush>();
+                plantsite.model.GetComponent<TreeBush>().mySitio = plantsite;
             }
         }
     }
@@ -88,9 +92,11 @@ public class TreeBushGenerator : MonoBehaviour
             float random = Random.Range(0f, 1f);
             if (random <= probabilityOfBushes)
             {
-                plantsite.plantacion = SitioPlantacion.plantationType.tree;
+                plantsite.plantacion = SitioPlantacion.plantationType.bush;
                 plantsite.model = Instantiate(bushPrefab, plantsite.pos, Quaternion.identity);
                 plantsite.model.transform.SetParent(arbolitosGroup.transform);
+                plantsite.model.AddComponent<TreeBush>();
+                plantsite.model.GetComponent<TreeBush>().mySitio = plantsite;
             }
         }
     }
