@@ -270,6 +270,7 @@ public class Actor : MonoBehaviour
                     }
                 }
             }
+            collidingWith.Remove(null);
         }
         if ((Mathf.Abs(this.transform.position.x - objetivo.x) <= 1f && Mathf.Abs(this.transform.position.z - objetivo.z) <= 1f) || tiempoPerseguido >= perseverancia)
         {
