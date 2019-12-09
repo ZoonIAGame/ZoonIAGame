@@ -45,7 +45,7 @@ public class Actor : MonoBehaviour
 
     [Header("Variables segun edad")]
     [Space(5)]
-    //variables que dependen de la edad
+    //variables que dependen de la edad (Sen(edad))
     public float tamanoEdad;
     public float velocidadEdad;
     public float rangoSensEdad;
@@ -82,33 +82,34 @@ public class Actor : MonoBehaviour
     [Header("Objetivo")]
     [Space(5)]
     public Vector3 objetivo;
-    public int prioridadObjetivoActual; // 1-Random/Flocking, 2-Reproduccion, 3-Sueño, 4-Energia
+    public int prioridadObjetivoActual; // 0-Random, 1-Flocking, 2-Reproduccion, 3-Sueño, 4-Energia
     public float tiempoPerseguido;
 
-    private GameManager manager;
-    private float udtEnFrames;
-    private SphereCollider TriggerSens;
-    private List<Collider> actorsCollidingWith = new List<Collider>();
-    private List<Collider> bushesCollidingWith = new List<Collider>();
+    private GameManager manager; //Acceso al manager para variables de control
+    private float udtEnFrames; //Udt son las unidades de tiempo que usamos. Convertida a frames
+    private SphereCollider TriggerSens; //Collider sensorial del tamaño del rango sensorial
+    private List<Collider> actorsCollidingWith = new List<Collider>(); //Lista de actores en su rango sens
+    private List<Collider> bushesCollidingWith = new List<Collider>(); //Lista de arbustos en su rango sens
     private bool turning = false;
     private float neighbourDistance = 3.0f;
     #endregion
 
     #region Metodos Unity
-    void Start()
+    void Start() //Se inicializan variables
     {
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         objetivo = this.transform.position;
     }
 
-    void Update()
+    void Update() //Se actualizan los valores del actor, se toma las decisiones de nuevo, se mueve el actor al objetivo y se chequean los daños por hambre y si ha dado a luz
     {
-        if (manager.tipoLoop == GameManager.LoopType.update)
+        if (manager.tipoLoop == GameManager.LoopType.update) //Se ejecuta a velocidad normal (frame rate normal 30fps)
         {
             udtEnFrames = calcularUdtEnFrames();
             updateActorValues();
             tomaDecisiones();
             moverse();
+            //Me muero de inanicion?
             if(energia <= 0)
             {
                 vida--;
@@ -118,6 +119,7 @@ public class Actor : MonoBehaviour
                 //Debug.Log("Inanición... Así es la vida")
                 Destroy(this.gameObject);
             }
+            //He dado a luz?
             if (embarazada)
             {
                 contadorEmbarazo += Time.deltaTime;
@@ -135,18 +137,48 @@ public class Actor : MonoBehaviour
                 }
             }
         }
+        //Envejece el actor
         edad += (manager.udtPorSegundo*Time.deltaTime)*vEnvejecimiento;
     }
 
-    void FixedUpdate()
+    void FixedUpdate() //Se actualizan los valores del actor, se toma las decisiones de nuevo, se mueve el actor al objetivo y se chequean los daños por hambre y si ha dado a luz
     {
-        if (manager.tipoLoop == GameManager.LoopType.fixedUpdate)
+        if (manager.tipoLoop == GameManager.LoopType.fixedUpdate) //Se ejecuta a la velocidad máxxima del computador
         {
             udtEnFrames = 1;
             updateActorValues();
             tomaDecisiones();
             moverse();
+            //Me muero de inanicion?
+            if (energia <= 0)
+            {
+                vida--;
+            }
+            if (vida <= 0)
+            {
+                //Debug.Log("Inanición... Así es la vida")
+                Destroy(this.gameObject);
+            }
+            //He dado a luz?
+            if (embarazada)
+            {
+                contadorEmbarazo += Time.deltaTime;
+                if (contadorEmbarazo > tGestacion)
+                {
+                    for (int i = 0; i < nHijos; i++)
+                    {
+                        GameObject actor = Instantiate(manager.herviboro, new Vector3(this.transform.position.x, this.transform.position.y + ((i + 1) * 10), this.transform.position.z), Quaternion.identity);
+                        actor.transform.SetParent(GameObject.FindGameObjectWithTag("BichitosGroup").transform);
+                        actor.GetComponent<Actor>().nacer(this);
+                        contadorEmbarazo = 0;
+                    }
+                    contadorEmbarazo = 0;
+                    embarazada = false;
+                }
+            }
         }
+        //Envejezco
+        edad += (manager.udtPorSegundo * Time.deltaTime) * vEnvejecimiento;
     }
 
     //animaciones
