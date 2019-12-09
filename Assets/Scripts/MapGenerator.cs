@@ -75,7 +75,7 @@ public class MapGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (generateTrees)
+        if (generateTrees && (!Application.isEditor || Application.isPlaying))
         {
             if (contador >= (1f / manager.udtPorSegundo) * 150)
             {
@@ -169,7 +169,7 @@ public class MapGenerator : MonoBehaviour
             display.DrawMesh(meshdata, TextureGenerator.TextureFromColorMap(colorMap, mapChunkSize, mapChunkSize));
             //display.DrawWaterTexture(TextureGenerator.TextureFromColorMap(waterColorMap, mapChunkSize, mapChunkSize));
             display.waterDrawMesh(MeshGenerator.GenerateWaterMesh(noiseMap, levelOfDetail), TextureGenerator.TextureFromColorMap(waterColorMap, mapChunkSize, mapChunkSize));
-            if (generateTrees)
+            if (generateTrees && (!Application.isEditor || Application.isPlaying))
             {
                 TreeBushGenerator treeBushGenerator = this.GetComponent<TreeBushGenerator>();
                 treeBushGenerator.generarPlantaciones(meshdata);

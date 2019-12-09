@@ -38,6 +38,11 @@ public class TreeBushGenerator : MonoBehaviour
     public void generarPlantaciones(MeshData meshData)
     {
         arbolitosGroup = GameObject.FindGameObjectWithTag("ArbolitosGroup");
+        foreach (SitioPlantacion plantsite in sitiosPlantacion)
+        {
+            Destroy(plantsite.model);
+        }
+        sitiosPlantacion.Clear();
         foreach (Vector3 v in meshData.vertices)
         {
             if (v.y > alturaMin && v.y < alturaMax)
@@ -45,6 +50,15 @@ public class TreeBushGenerator : MonoBehaviour
                 sitiosPlantacion.Add(new SitioPlantacion(new Vector3(v.x* 10, v.y* 10, v.z*10), SitioPlantacion.plantationType.none));
             }
         }
+    }
+
+    public void destruirPlantaciones()
+    {
+        foreach (SitioPlantacion plantsite in sitiosPlantacion)
+        {
+            Destroy(plantsite.model);
+        }
+        sitiosPlantacion.Clear();
     }
 
     public void generarArbolesYArbustos()

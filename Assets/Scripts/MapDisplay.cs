@@ -32,15 +32,21 @@ public class MapDisplay : MonoBehaviour
     {
         meshFilter.sharedMesh = meshData.CreateMesh();
         meshRenderer.sharedMaterial.mainTexture = texture;
-        meshCollider = meshRenderer.gameObject.AddComponent<MeshCollider>();
-        meshCollider.sharedMesh = meshData.CreateMesh();
+        if (meshRenderer.gameObject.GetComponent<MeshCollider>() == null)
+        {
+            meshCollider = meshRenderer.gameObject.AddComponent<MeshCollider>();
+            meshCollider.sharedMesh = meshData.CreateMesh();
+        }
     }
 
     public void waterDrawMesh(MeshData meshData, Texture2D texture)
     {
         watermeshFilter.sharedMesh = meshData.CreateMesh();
         watermeshRenderer.sharedMaterial.mainTexture = texture;
-        waterMeshCollider = watermeshRenderer.gameObject.AddComponent<MeshCollider>();
-        waterMeshCollider.sharedMesh = meshData.CreateMesh();
+        if (watermeshRenderer.gameObject.GetComponent<MeshCollider>() == null)
+        {
+            waterMeshCollider = watermeshRenderer.gameObject.AddComponent<MeshCollider>();
+            waterMeshCollider.sharedMesh = meshData.CreateMesh();
+        }
     }
 }
