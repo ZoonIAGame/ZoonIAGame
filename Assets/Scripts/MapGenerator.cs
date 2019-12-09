@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    public bool generateTrees = false;
     public enum DrawMode
     {
         NoiseMap, ColorMap, Mesh, FalloffMap
@@ -61,10 +62,28 @@ public class MapGenerator : MonoBehaviour
 
     private float[,] falloffMap;
 
+    private GameManager manager;
+
+    private float contador = 0;
+
     private void Awake()
     {
+        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         falloffMap = FalloffGenerator.GenerateFalloffMap(mapChunkSize);
         GenerateMap();
+    }
+
+    private void Update()
+    {
+        if (generateTrees)
+        {
+            if (contador >= (1f / manager.udtPorSegundo) * 150)
+            {
+                this.GetComponent<TreeBushGenerator>().generarArbustos();
+                contador = 0;
+            }
+            contador += Time.deltaTime;
+        }
     }
 
     public void GenerateMap()
@@ -146,10 +165,18 @@ public class MapGenerator : MonoBehaviour
             display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapChunkSize, mapChunkSize));
         }else if (drawMode == DrawMode.Mesh)
         {
-            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve, levelOfDetail), TextureGenerator.TextureFromColorMap(colorMap, mapChunkSize, mapChunkSize));
+            MeshData meshdata = MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve, levelOfDetail);
+            display.DrawMesh(meshdata, TextureGenerator.TextureFromColorMap(colorMap, mapChunkSize, mapChunkSize));
             //display.DrawWaterTexture(TextureGenerator.TextureFromColorMap(waterColorMap, mapChunkSize, mapChunkSize));
             display.waterDrawMesh(MeshGenerator.GenerateWaterMesh(noiseMap, levelOfDetail), TextureGenerator.TextureFromColorMap(waterColorMap, mapChunkSize, mapChunkSize));
-        }else if (drawMode == DrawMode.FalloffMap)
+            if (generateTrees)
+            {
+                TreeBushGenerator treeBushGenerator = this.GetComponent<TreeBushGenerator>();
+                treeBushGenerator.generarPlantaciones(meshdata);
+                treeBushGenerator.generarArbolesYArbustos();
+            }
+        }
+        else if (drawMode == DrawMode.FalloffMap)
         {
             display.DrawTexture(TextureGenerator.TextureFromHeightMap(FalloffGenerator.GenerateFalloffMap(mapChunkSize)));
         }
